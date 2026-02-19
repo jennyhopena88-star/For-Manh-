@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dear Mạnh 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff9acb, #ffd1e8);
+      font-family: "Segoe UI", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .card {
+      background: #fff;
+      width: 90%;
+      max-width: 420px;
+      padding: 24px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    h1 { color: #ff4f9a; }
+    .content {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      text-align: left;
+      white-space: pre-line;
+      display: none;
+      margin-top: 10px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      width: 80%;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      background: #ff4f9a;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 6px;
+    }
+    .yes { background: #ff4f9a; }
+    .no {
+      background: #ccc;
+      color: #333;
+      position: absolute;
+    }
+    .question { display: none; margin-top: 16px; }
+    .success {
+      display: none;
+      margin-top: 16px;
+      color: #ff4f9a;
+      font-size: 17px;
+      font-weight: 600;
+    }
+    .hearts span {
+      position: fixed;
+      bottom: -10px;
+      font-size: 20px;
+      animation: float 6s linear infinite;
+      color: #ff4f9a;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+    }
+    .music-note {
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      font-size: 12px;
+      color: white;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nhạc nền (bạn có thể đổi link mp3 khác nếu thích) -->
+  <audio id="bgm" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card">
+    <h1>Gửi Mạnh 💌</h1>
+
+    <p>Nhập mật khẩu để mở quà nè:</p>
+    <input type="password" id="password" placeholder="Nhập mật khẩu..." />
+    <br />
+    <button onclick="checkPassword()">Mở quà 🎁</button>
+
+    <div class="content" id="content">
+Chào Embe của chị …
+
+Lần đầu gặp em chị cũng hok thấy gì đặc biệt ^.^ sau đó thì bị thu hút vì những điều tưởng chừng rất nhỏ nhặt như : mở cửa xe, luôn có mặt lúc c cần, đôi khi trẻ con nhưng cũng có lúc trưởng thành hơn lứa tuổi của em :)) … con người chị khi nhận được sự quan tâm thì sẽ cho đi đúng cái nhận được hoặc hơn nữa kìa. Chị bắt đầu quan tâm đến em. Quan tâm đến cảm xúc , quan tâm đến suy nghĩ. Chị thấy đâu đó có sự tương đồng. Chắc có lẽ chị thích Mạnh trước cũng nên :)) 
+
+Không phải chị k muốn được che chở bảo vệ mà là chị phải gồng lâu nay thành thói quen rồi. Chị sợ chị tỏ ra yếu đuối , dựa dẫm thì Mạnh sẽ chạy mất đó 😅… cái Mạnh muốn cũng là điều chị muốn: quan tâm và đồng hành.
+    </div>
+
+    <div class="question" id="question">
+      <p><strong>Mạnh có muốn đồng hành cùng chị không? 💖</strong></p>
+      <button class="yes" onclick="yesClick()">Có 💕</button>
+      <button class="no" id="noBtn" onmouseover="moveNo()">Không 😝</button>
+    </div>
+
+    <div class="success" id="success">
+      Từ giờ mình cùng quan tâm nhau nhiều hơn nha 💗  
+      <br/>Chị hứa sẽ dịu dàng hơn một chút, còn em thì đừng bỏ chạy nha 😝  
+      <br/>Cảm ơn em vì đã ở đây với chị 🥰
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+  <div class="music-note">🎵 Nhạc đang phát</div>
+
+  <script>
+    const correctPassword = "2629";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === correctPassword) {
+        document.getElementById("content").style.display = "block";
+        document.getElementById("question").style.display = "block";
+        document.getElementById("bgm").play();
+      } else {
+        alert("Sai mật khẩu rồi 😝");
+      }
+    }
+
+    function moveNo() {
+      const btn = document.getElementById("noBtn");
+      const x = Math.random() * 250;
+      const y = Math.random() * 200;
+      btn.style.left = x + "px";
+      btn.style.top = y + "px";
+    }
+
+    function yesClick() {
+      document.getElementById("success").style.display = "block";
+      startHearts();
+    }
+
+    function startHearts() {
+      const hearts = document.getElementById("hearts");
+      setInterval(() => {
+        const span = document.createElement("span");
+        span.innerHTML = "💗";
+        span.style.left = Math.random() * 100 + "vw";
+        span.style.fontSize = Math.random() * 10 + 15 + "px";
+        span.style.animationDuration = Math.random() * 3 + 4 + "s";
+        hearts.appendChild(span);
+        setTimeout(() => span.remove(), 6000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
